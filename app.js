@@ -21,7 +21,6 @@ const fillJokes = async function () {
 
         catch (err) {
             console.error(err);
-            alert(err);
         }
     };
 };
