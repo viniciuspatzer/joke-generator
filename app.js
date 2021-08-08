@@ -26,24 +26,17 @@ const fillJokes = async function () {
 };
 
 const getJoke = function () {
-    try {
-        const filteredJokes = [...new Set(jokesArr)].filter(value =>
-            !jokesRep.includes(value.joke));
+    const filteredJokes = [...new Set(jokesArr)].filter(value =>
+        !jokesRep.includes(value.joke));
 
-        if (!filteredJokes)
-            return alert('There is no more jokes!!');
+    if (filteredJokes.length === 0)
+        return alert('There is no more jokes!!');
 
-        const n = Math.floor(Math.random() * filteredJokes.length);
-        const joke = filteredJokes[n].joke;
+    const n = Math.floor(Math.random() * filteredJokes.length);
+    const joke = filteredJokes[n].joke;
 
-        jokeEl.textContent = joke;
-        jokesRep.push(joke);
-    }
-
-    catch (err) {
-        console.error(err)
-        alert('There is no more jokes!');
-    }
+    jokeEl.textContent = joke;
+    jokesRep.push(joke);
 };
 
 

@@ -24,6 +24,7 @@ body{
     width: 600px;
     background-color: #FFF;
     padding: 2rem;
+    margin-top: -5rem;
 }
 
 .card .emoji{
