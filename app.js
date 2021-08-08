@@ -3,8 +3,9 @@
 const jokeEl = document.querySelector('#joke_text');
 const buttonEl = document.querySelector('#button');
 
-let jokesToFilter = []
 let jokesArr = [];
+let jokesRep = [];
+
 
 const fillJokes = async function () {
     while (jokesArr.length <= 100) {
@@ -15,26 +16,35 @@ const fillJokes = async function () {
                 throw new Error('Problem with getting the joke.');
 
             const { jokes } = await res.json();
-
-            // Filling array data
-            jokes.forEach(joke => jokesToFilter.push(joke));
+            jokes.forEach(joke => jokesArr.push(joke));
         }
 
         catch (err) {
-            console.error(err)
+            console.error(err);
             alert(err);
         }
-    }
-    // Filtering jokes array
-    jokesArr = [...new Set(jokesToFilter)];
+    };
 };
 
 const getJoke = function () {
-    const i = Math.floor(Math.random() * jokesArr.length);
-    const joke = jokesArr[i].joke;
-    jokeEl.textContent = joke;
-    jokesArr.splice(i, 1);
-    // using before... 
+    try {
+        const filteredJokes = [...new Set(jokesArr)].filter(value =>
+            !jokesRep.includes(value.joke));
+
+        if (!filteredJokes)
+            return alert('There is no more jokes!!');
+
+        const n = Math.floor(Math.random() * filteredJokes.length);
+        const joke = filteredJokes[n].joke;
+
+        jokeEl.textContent = joke;
+        jokesRep.push(joke);
+    }
+
+    catch (err) {
+        console.error(err)
+        alert('There is no more jokes!');
+    }
 };
 
 
