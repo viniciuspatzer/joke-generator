@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0554FF;
+    padding: 0 3%;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    background-color: #FFF;
+    padding: 2rem;
+}
+
+.card .emoji{
+    font-size: 5rem;
+}
+
+.card #joke_text{
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.card #button{
+    color: #FFF;
+    padding: 0.5rem 1rem;
+    background-color: #0554FF;
+    text-decoration: none;
+    transition: 0.1s;
+}
+
+.card #button:hover{
+    filter: brightness(1.2);
+}
