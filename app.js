@@ -3,11 +3,11 @@
 const jokeEl = document.querySelector('#joke_text');
 const buttonEl = document.querySelector('#button');
 
-let jokesArr = [];
-let jokesRep = [`Java and C were telling jokes. It was C's turn, so he writes something on the wall, points to it and says "Do you get the reference?" But Java didn't.`];
+const jokesArr = [];
+const jokesRep = [`Java and C were telling jokes. It was C's turn, so he writes something on the wall, points to it and says "Do you get the reference?" But Java didn't.`];
 
 
-const fillJokes = async function () {
+(async function fillJokes() {
     while (jokesArr.length <= 100) {
         try {
             const res = await fetch('https://v2.jokeapi.dev/joke/Any?type=single&amount=10');
@@ -16,6 +16,7 @@ const fillJokes = async function () {
                 throw new Error('Problem with getting the joke.');
 
             const { jokes } = await res.json();
+            console.log(jokes); /////////
             jokes.forEach(joke => jokesArr.push(joke));
         }
 
@@ -23,7 +24,7 @@ const fillJokes = async function () {
             console.error(err);
         }
     };
-};
+})();
 
 const getJoke = function () {
     const filteredJokes = [...new Set(jokesArr)].filter(value =>
@@ -41,4 +42,3 @@ const getJoke = function () {
 
 
 buttonEl.addEventListener('click', getJoke);
-window.addEventListener('DOMContentLoaded', fillJokes);
