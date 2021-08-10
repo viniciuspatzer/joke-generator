@@ -16,7 +16,6 @@ const jokesRep = [`Java and C were telling jokes. It was C's turn, so he writes 
                 throw new Error('Problem with getting the joke.');
 
             const { jokes } = await res.json();
-            console.log(jokes); /////////
             jokes.forEach(joke => jokesArr.push(joke));
         }
 
