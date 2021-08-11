@@ -1,13 +1,16 @@
 'use strict';
 
+// Elements
 const jokeEl = document.querySelector('#joke_text');
 const buttonEl = document.querySelector('#button');
 
+// Data
 const jokesArr = [];
 const jokesRep = [`Java and C were telling jokes. It was C's turn, so he writes something on the wall, points to it and says "Do you get the reference?" But Java didn't.`];
 
 
-(async function fillJokes() {
+// Fetch API and fill jokes array
+(async () => {
     while (jokesArr.length <= 100) {
         try {
             const res = await fetch('https://v2.jokeapi.dev/joke/Any?type=single&amount=10');
@@ -16,7 +19,7 @@ const jokesRep = [`Java and C were telling jokes. It was C's turn, so he writes 
                 throw new Error('Problem with getting the joke.');
 
             const { jokes } = await res.json();
-            jokes.forEach(joke => jokesArr.push(joke));
+            jokes.forEach(data => jokesArr.push(data.joke));
         }
 
         catch (err) {
@@ -27,13 +30,13 @@ const jokesRep = [`Java and C were telling jokes. It was C's turn, so he writes 
 
 const getJoke = function () {
     const filteredJokes = [...new Set(jokesArr)].filter(value =>
-        !jokesRep.includes(value.joke));
+        !jokesRep.includes(value));
 
     if (filteredJokes.length === 0)
         return alert('There is no more jokes!!');
 
-    const n = Math.floor(Math.random() * filteredJokes.length);
-    const joke = filteredJokes[n].joke;
+    const r = Math.floor(Math.random() * filteredJokes.length);
+    const joke = filteredJokes[r];
 
     jokeEl.textContent = joke;
     jokesRep.push(joke);
